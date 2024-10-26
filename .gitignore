@@ -1,0 +1,36 @@
+# OSX
+#
+.DS_Store
+
+# VS Code
+.vscode
+
+# Android/IntelliJ
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# yarn
+.yarn/*
+yarn.lock
+
+# temp data
+/test-results/
+/playwright-report/
+/blob-report/
+temp-*
+
+# credentials
+resources/users.csv

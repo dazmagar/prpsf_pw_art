@@ -1,0 +1,32 @@
+{
+  "name": "proposify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "artillery": "^2.0.15",
+    "csv-parser": "^3.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-no-inline-styles": "^1.0.5",
+    "eslint-plugin-playwright": "^1.6.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pw:demo:chromium": "yarn playwright test tests/e2e/demo.spec.js --config=playwright.config.js --project=chromium",
+    "pw:demo:webkit": "yarn playwright test tests/e2e/demo.spec.js --config=playwright.config.js --project=webkit",
+    "pw:demo": "yarn playwright test tests/e2e/demo.spec.js --config=playwright.config.js",
+    "pw:editor:chromium": "yarn playwright test tests/e2e/editor.spec.js --config=playwright.config.js --project=chromium",
+    "pw:editor:webkit": "yarn playwright test tests/e2e/editor.spec.js --config=playwright.config.js --project=webkit",
+    "pw:editor": "yarn playwright test tests/e2e/editor.spec.js --config=playwright.config.js",
+    "art-gen": "node tests/load/art-gen.js",
+    "art-cloud": "yarn art-gen && ./node_modules/.bin/artillery run tests/load/temp-artillery.yml --record"
+  }
+}

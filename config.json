@@ -1,0 +1,21 @@
+{
+  "BASE_URL": "https://app.proposify.net",
+  "USERS": "resources/users.csv",
+  "IS_HEADLESS": true,
+  "SCREENSHOTS": false,
+  "CONSOLE_OUT": true,
+  "SMALL_TIMEOUT": 5000,
+  "SHORT_TIMEOUT": 10000,
+  "PACING_TIME_CONST": 500,
+  "PACING_TIME_DEV": 250,
+  "LOAD_TEST_PHASES": {
+    "1": {
+      "T_DURATION": 120,
+      "T_ARRIVAL_COUNT": 2
+    },
+    "2": {
+      "T_DURATION": 120,
+      "T_ARRIVAL_COUNT": 3
+    }
+  }
+}

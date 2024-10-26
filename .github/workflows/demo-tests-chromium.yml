@@ -1,0 +1,60 @@
+name: Run Demo Tests (Chromium)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  demo-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Install Playwright browser for Chromium
+        run: yarn playwright install chromium
+
+      - name: Generate users.csv
+        env:
+          TEST_USER_EMAIL_1: ${{ secrets.TEST_USER_EMAIL_1 }}
+          TEST_USER_EMAIL_2: ${{ secrets.TEST_USER_EMAIL_2 }}
+          TEST_USER_EMAIL_3: ${{ secrets.TEST_USER_EMAIL_3 }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        run: node -e "require('./utils/helpers').generateUsersCSV()"
+
+      - name: Run Playwright Demo tests on Chromium
+        run: yarn pw:demo:chromium
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-demo-report-chromium
+          path: playwright-report
