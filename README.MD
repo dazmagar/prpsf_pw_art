@@ -1,5 +1,27 @@
 # Testing Project
 
+## Project Structure
+
+Here is a brief overview of the project structure and the purpose of key folders and files:
+
+`| config.json` # Configuration file for tests and settings
+`| package.json` # Node.js dependencies and scripts
+`| playwright.config.js` # Playwright-specific configuration
+`| README.md` # Project documentation
+`|`  
+`+---.github`
+`| +---workflows` # GitHub Actions CI/CD workflows for automated tests
+`|`  
+`+---pages` # Page Object Model (POM) for managing different application pages
+`|`  
+`+---resources` # Test resources such as images and user data (e.g., users.csv)
+`|`  
+`+---tests`
+`| +---e2e` # End-to-end tests using Playwright
+`| +---load` # Load test scripts for Artillery
+`|`  
+`+---utils` # Utility functions for common operations in tests
+
 ## Setup
 
 1. Clone the repository:
